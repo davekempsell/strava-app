@@ -1,17 +1,47 @@
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
+const fetch = (...args) =>
+	import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 require('dotenv').config()
-// const uri = process.env.ATLAS_URI;
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(morgan('tiny'))
+app.use(morgan('tiny'));
 
-app.get('/', (req,res) => {
-  res.json('API message')
+app.get('/', async function (req,res) {
+  const url = "https://www.strava.com/oauth/token"
+  const options = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      refresh_token: process.env.REFRESH_TOKEN,
+      grant_type: 'refresh_token'
+    })
+  }
+
+  fetch(url, options)
+    .then(response => response.json())
+    .then((json) => {
+      const access_token = json.access_token
+      const activities_link = 'https://www.strava.com/api/v3/athlete/activities'
+      const start = '1670371200'
+      const end = '1671753600'
+      
+      return fetch(`${activities_link}?before=${end}&after=${start}&access_token=${access_token}`)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      res.json(data)
+    })
 })
 
 const port = process.env.PORT || 5050;
@@ -19,3 +49,5 @@ const port = process.env.PORT || 5050;
 app.listen(port, () => {
   console.log(`App listening on port: ${port}`)
 })
+
+
