@@ -26,6 +26,11 @@ const App = () =>{
       })
   },[])
 
+  function daysLeft() {
+    const today = new Date()
+    const day = today.getDate()
+    return 22 - day
+  }
 
 
   return (
@@ -36,6 +41,8 @@ const App = () =>{
       <h2>
         Distance remaining: {500 - total.toFixed(2)}km
       </h2>
+      <h3>Days remaining: {daysLeft()}</h3>
+      <h3>Required distance per day: {((500 - total) / daysLeft()).toFixed(2)}km</h3>
     </div>
   )
 }

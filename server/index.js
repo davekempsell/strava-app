@@ -27,10 +27,12 @@ app.get('/', async function (req,res) {
     })
   }
 
+  let access_token = ''
+
   fetch(url, options)
     .then(response => response.json())
     .then((json) => {
-      const access_token = json.access_token
+      access_token = json.access_token
       const activities_link = 'https://www.strava.com/api/v3/athlete/activities'
       const start = '1670371200'
       const end = '1671753600'
@@ -39,9 +41,18 @@ app.get('/', async function (req,res) {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
-      res.json(data)
+      const activity_link = 'https://www.strava.com/api/v3/activities'
+      const ids = data.map(element => {
+        return element.id
+      })
+      const workouts = ids.map((id) => {
+        return fetch(`${activity_link}/${id}?access_token=${access_token}`)
+          .then(response => response.json())
+          .then((data) => {return data})
+      })
+      return Promise.all(workouts)
     })
+    .then(data => res.json(data))
 })
 
 const port = process.env.PORT || 5050;
