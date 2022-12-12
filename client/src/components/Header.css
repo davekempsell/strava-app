@@ -10,5 +10,10 @@
 
 .header-container > img {
   width: 50vw;
+  min-width: 320px;
   padding: 2rem;
+}
+
+.header-container > h1 {
+  padding: 0rem 2rem;
 }
