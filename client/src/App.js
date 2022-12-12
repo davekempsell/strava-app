@@ -4,6 +4,7 @@ const App = () =>{
 
   const [data, setData] = useState(null)
   const [total, setTotal] = useState(0)
+  const [workoutsData, setWorkoutsData] = useState([])
 
   function totalMeters(data) {
     let total = 0
@@ -14,7 +15,7 @@ const App = () =>{
   }
 
   useEffect(() => {
-    fetch('http://localhost:5050/')
+    fetch('http://localhost:5050/test')
       .then((res) => res.json())
       .then((data) => {
         setData(data)
@@ -32,17 +33,26 @@ const App = () =>{
     return 22 - day
   }
 
+  function WorkoutCard(workout) {
+    return (
+      <div>
+        <p>{workout.name}</p>
+      </div>
+    )
+  }
 
   return (
     <div>
-      <h1>
-        Total Distance: {total.toFixed(2)}km
-      </h1>
-      <h2>
-        Distance remaining: {500 - total.toFixed(2)}km
-      </h2>
-      <h3>Days remaining: {daysLeft()}</h3>
-      <h3>Required distance per day: {((500 - total) / daysLeft()).toFixed(2)}km</h3>
+      <div>
+        <h1>
+          Total Distance: {total.toFixed(2)}km
+        </h1>
+        <h2>
+          Distance remaining: {500 - total.toFixed(2)}km
+        </h2>
+        <h3>Days remaining: {daysLeft()}</h3>
+        <h3>Required distance per day: {((500 - total) / daysLeft()).toFixed(2)}km</h3>
+      </div>
     </div>
   )
 }

@@ -2,7 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
 const fetch = (...args) =>
-	import('node-fetch').then(({default: fetch}) => fetch(...args));
+import('node-fetch').then(({default: fetch}) => fetch(...args));
+const example = require('./example')
 
 require('dotenv').config()
 
@@ -53,6 +54,11 @@ app.get('/', async function (req,res) {
       return Promise.all(workouts)
     })
     .then(data => res.json(data))
+    .catch((err) => console.log(err))
+})
+
+app.get('/test', (req, res) => {
+  res.send(example)
 })
 
 const port = process.env.PORT || 5050;
