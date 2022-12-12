@@ -58,13 +58,15 @@ app.get('/', async function (req,res) {
 })
 
 app.get('/test', (req, res) => {
-  res.send(example)
+  setTimeout(() => {
+    res.send(example)
+  }, 3000)
 })
 
 const port = process.env.PORT || 5050;
 
 app.listen(port, () => {
-  console.log(`App listening on port: ${port}`)
+    console.log(`App listening on port: ${port}`)
 })
 
 
