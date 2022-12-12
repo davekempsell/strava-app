@@ -19,9 +19,9 @@ export default function ChallengeSummary(data) {
     const day = today.getDate()
     const latestWorkout = new Date(data[0].start_date_local)
     if(day === latestWorkout.getDate()) {
-      return 22 - (day + 1)
+      return 23 - (day + 1)
     } else {
-      return 22 - day
+      return 23 - day
     }
   }
 

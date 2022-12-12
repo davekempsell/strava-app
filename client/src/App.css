@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   --orange: #c96a4a;
   --background: #1c1e3d;
