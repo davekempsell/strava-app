@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --orange: #c96a4a;
+  --background: #1c1e3d;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Roboto', 'sans-serif';
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  align-items: center;
+}
