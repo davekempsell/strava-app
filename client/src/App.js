@@ -11,15 +11,15 @@ const App = () =>{
   const [loading, setLoading] = useState(true)
 
   // For testing
-  useEffect(() => {
-    setData(example)
-    setLoading(false)
-  }, [])
+  // useEffect(() => {
+  //   setData(example)
+  //   setLoading(false)
+  // }, [])
 
   // Real API call
-  // useEffect(() => {
-  //   getWorkouts(setData, setLoading)
-  // },[])
+  useEffect(() => {
+    getWorkouts(setData, setLoading)
+  },[])
 
   return (
     <div className="main-container">

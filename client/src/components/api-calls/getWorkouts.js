@@ -1,7 +1,7 @@
 import React from 'react'
 
 export function getWorkouts(setData, setLoading) {
-  fetch('http://localhost:5050/test')
+  fetch('https://strava-api-server.onrender.com')
     .then((res) => res.json())
     .then((data) => {
       setData(data)

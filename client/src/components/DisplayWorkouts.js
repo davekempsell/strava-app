@@ -5,8 +5,6 @@ import { BiTimer } from 'react-icons/bi'
 import { ImPower } from 'react-icons/im'
 import { FaHeartbeat } from 'react-icons/fa'
 
-
-
 import css from './DisplayWorkouts.css'
 
 const workoutCard = (workout) => {
@@ -22,7 +20,7 @@ const workoutCard = (workout) => {
   const hours = Math.floor(duration / 3600)
   const minutes = Math.floor(duration / 60) % 60
   const aveSpeed = (distance / 1000) / (duration / 3600)
-  const aveWatts = workout.average_watts
+  const aveWatts = workout.average_watts.toFixed(0)
   const aveHr = workout.average_heartrate
   const suffer_score = workout.suffer_score
   const photo = workout.photos.primary.urls[600]
