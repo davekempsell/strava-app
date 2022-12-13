@@ -1,4 +1,12 @@
 import React from 'react'
+import { BsDropletFill, BsSpeedometer2 } from 'react-icons/bs'
+import { GiPathDistance } from 'react-icons/gi'
+import { BiTimer } from 'react-icons/bi'
+import { ImPower } from 'react-icons/im'
+import { FaHeartbeat } from 'react-icons/fa'
+
+
+
 import css from './DisplayWorkouts.css'
 
 const workoutCard = (workout) => {
@@ -26,12 +34,36 @@ const workoutCard = (workout) => {
       <p>{`${dd}/${mm}/${yyyy} ${time}`}</p>
       <p>{activityType}</p>
       <div className="workout-stats-container">
-        <p>Distance: {(distance / 1000).toFixed(2)}km</p>
-        <p>Duration: {`${hours}hr ${minutes}mins`}</p>
-        <p>Ave. Speed: {aveSpeed.toFixed(1)}km/h</p>
-        <p>Ave. Watts: {aveWatts}</p>
-        <p>Ave. HR: {aveHr.toFixed(0)}bpm</p>
-        <p>Relative Effort: {suffer_score}</p>
+        <div id="stat">
+          <GiPathDistance/>
+          <p>{(distance / 1000).toFixed(2)}km</p>
+          <p className="label">Distance</p>
+        </div>
+        <div id="stat">
+          <BiTimer/>
+          <p>{`${hours}hr ${minutes}m`}</p>
+          <p className="label">Duration</p>
+        </div>
+        <div id="stat">
+          <BsSpeedometer2/>
+          <p>{aveSpeed.toFixed(1)}km/h</p>
+          <p className="label">Ave. Speed</p>
+        </div>
+        <div id="stat">
+          <ImPower/>
+          <p>{aveWatts}w</p>
+          <p className="label">Ave. Power</p>
+        </div>
+        <div id="stat">
+          <FaHeartbeat id="heartbeat"/>
+          <p>{aveHr.toFixed(0)}bpm</p>
+          <p className="label">Ave. HR</p>
+        </div>
+        <div id="stat">
+          <BsDropletFill id="droplet"/>
+          <p>{suffer_score}</p>
+          <p className="label">Relative Effort</p>
+        </div>
       </div>
     </div>
   )
