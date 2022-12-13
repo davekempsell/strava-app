@@ -5,7 +5,7 @@ import { BiTimer } from 'react-icons/bi'
 import { ImPower } from 'react-icons/im'
 import { FaHeartbeat } from 'react-icons/fa'
 
-import css from './DisplayWorkouts.css'
+import './DisplayWorkouts.css'
 
 const workoutCard = (workout) => {
   const newDate = new Date(workout.start_date_local)
@@ -28,7 +28,7 @@ const workoutCard = (workout) => {
   return (
     <div className="workout-card" key={workout.id}>
       <h2>{workout.name}</h2>
-      <img src={photo} style={{width: '100%'}}/>
+      <img src={photo} style={{width: '100%'}} alt="screenshot of workout from Strava"/>
       <p>{`${dd}/${mm}/${yyyy} ${time}`}</p>
       <p>{activityType}</p>
       <div className="workout-stats-container">

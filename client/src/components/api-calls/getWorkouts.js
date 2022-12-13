@@ -1,4 +1,3 @@
-import React from 'react'
 
 export function getWorkouts(setData, setLoading) {
   fetch('https://strava-api-server.onrender.com')
