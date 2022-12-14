@@ -15,7 +15,6 @@ app.use(morgan('tiny'));
 let stravaData = example
 
 async function getData() {
-  setInterval(() => {
     const url = "https://www.strava.com/oauth/token"
     const options = {
       method: 'POST',
@@ -57,15 +56,28 @@ async function getData() {
         })
         return Promise.all(workouts)
       })
-      .then(data => stravaData = data)
+      .then(data => {
+        stravaData = data
+        console.log('stravaData updated')
+      })
       .catch((err) => console.log(err))
+}
+
+function getStravaData() {
+  setInterval(() => {
+    getData()
   }, 1800000)
 }
 
-getData()
+getStravaData()
 
 app.get('/', (req,res) => {
   res.json(stravaData)
+})
+
+app.get('/update', (req, res) => {
+  getData()
+  res.send('Strava Data Updated')
 })
 
 app.get('/test', (req, res) => {
