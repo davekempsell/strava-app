@@ -59,7 +59,7 @@ async function getData() {
       })
       .then(data => stravaData = data)
       .catch((err) => console.log(err))
-  }, 10000)
+  }, 1800000)
 }
 
 getData()
