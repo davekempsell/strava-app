@@ -1,7 +1,6 @@
 
 export function getWorkouts(setData, setLoading) {
-  // fetch('https://strava-api-server.onrender.com')
-  fetch('http://localhost:5050/')
+  fetch('https://strava-api-server.onrender.com')
     .then((res) => res.json())
     .then((data) => {
       setData(data.data)
