@@ -57,8 +57,6 @@ async function getData(req,res) {
       .then((json) => {
         access_token = json.access_token
         const activities_link = 'https://www.strava.com/api/v3/athlete/activities'
-        // const start = '1670371200'
-        // const end = '1671753600'
         const start = getStart()
         const end = getEnd()
         
