@@ -8,6 +8,10 @@
   text-align: center;
 }
 
+.summary-container > h2 {
+  color: black;
+}
+
 .needed-container {
   display: flex;
   gap: 1rem;

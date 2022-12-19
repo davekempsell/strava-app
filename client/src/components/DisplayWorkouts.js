@@ -15,15 +15,16 @@ const workoutCard = (workout) => {
   const time = newDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
   const activityType = workout.type
-  const distance = workout.distance
+  const distance = workout.distance ? workout.distance : 'N/A'
+  const distanceStat = workout.distance ? (workout.distance / 1000).toFixed(2) + 'km' : 'N/A'
   const duration = workout.moving_time
   const hours = Math.floor(duration / 3600)
   const minutes = Math.floor(duration / 60) % 60
-  const aveSpeed = (distance / 1000) / (duration / 3600)
-  const aveWatts = workout.average_watts.toFixed(0)
+  const aveSpeed = distance !== 'N/A' ? ((distance / 1000) / (duration / 3600)).toFixed(1) + 'km/h' : 'N/A'
+  const aveWatts = workout.average_watts ? workout.average_watts.toFixed(0) + 'w' : 'N/A'
   const aveHr = workout.average_heartrate
   const suffer_score = workout.suffer_score
-  const photo = workout.photos.primary.urls[600]
+  const photo = workout.photos.primary ? workout.photos.primary.urls[600] : 'https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=PM_optEhHBTZkuJQLlCjLz-v3zzxp-1mpNQZsdjrbns='
 
   return (
     <div className="workout-card" key={workout.id}>
@@ -34,7 +35,7 @@ const workoutCard = (workout) => {
       <div className="workout-stats-container">
         <div id="stat">
           <GiPathDistance/>
-          <p>{(distance / 1000).toFixed(2)}km</p>
+          <p>{distanceStat}</p>
           <p className="label">Distance</p>
         </div>
         <div id="stat">
@@ -44,12 +45,12 @@ const workoutCard = (workout) => {
         </div>
         <div id="stat">
           <BsSpeedometer2/>
-          <p>{aveSpeed.toFixed(1)}km/h</p>
+          <p>{aveSpeed}</p>
           <p className="label">Ave. Speed</p>
         </div>
         <div id="stat">
           <ImPower/>
-          <p>{aveWatts}w</p>
+          <p>{aveWatts}</p>
           <p className="label">Ave. Power</p>
         </div>
         <div id="stat">

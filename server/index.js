@@ -16,6 +16,24 @@ const port = process.env.PORT || 5050;
 
 let stravaData
 
+function getStart() {
+  const now = new Date
+  const month = now.getMonth()
+  const year = now.getFullYear()
+  const startDate = new Date(year, month, 1)
+  const start = Date.parse(startDate) / 1000
+  return start.toString()
+}
+
+function getEnd() {
+  const now = new Date
+  const month = now.getMonth()
+  const year = now.getFullYear()
+  const endDate = new Date(year, month + 1, 1)
+  const end = Date.parse(endDate) / 1000
+  return end.toString()
+}
+
 async function getData(req,res) {
     const url = "https://www.strava.com/oauth/token"
     const options = {
@@ -39,8 +57,10 @@ async function getData(req,res) {
       .then((json) => {
         access_token = json.access_token
         const activities_link = 'https://www.strava.com/api/v3/athlete/activities'
-        const start = '1670371200'
-        const end = '1671753600'
+        // const start = '1670371200'
+        // const end = '1671753600'
+        const start = getStart()
+        const end = getEnd()
         
         return fetch(`${activities_link}?before=${end}&after=${start}&access_token=${access_token}`)
       })
