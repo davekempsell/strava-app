@@ -4,8 +4,8 @@ import './Header.css'
 export default function Header() {
   return (
     <div className='header-container'>
-      <img src='/images/festive500logo.png' alt="Rapha festive 500 logo"></img>
-      <h1>Dave's Early Festive 500 Challenge</h1>
+      <img src='/images/stravaName.png' alt="Rapha festive 500 logo"></img>
+      <h1>Monthly mileage tracker</h1>
     </div>
   )
 }

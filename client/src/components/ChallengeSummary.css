@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: var(--background);
+  background-color: var(--strava-orange);
   color: white;
   align-items: center;
   text-align: center;
@@ -26,5 +26,5 @@
 .needed-wrapper > h4 {
   width: 60px;
   margin: 0;
-  color: white
+  color: black;
 }
