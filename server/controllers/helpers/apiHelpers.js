@@ -45,12 +45,22 @@ getActivitiesUrl = async (access_token) => {
 exports.getActivityIds = async (access_token) => {
   const activitiesUrl = await getActivitiesUrl(access_token)
   const response = await fetch(activitiesUrl)
+  console.log(response)
   const json = await response.json()
   const ids = json.map(element => {
     return element.id
-  })
+    })
 
   return ids
+}
+
+// Using the activities url to retrieve the list of workouts since 1 Jan 2020
+exports.getAllActivities = async (access_token) => {
+  const activitiesUrl = await getActivitiesUrl(access_token)
+  const response = await fetch(activitiesUrl)
+  const json = await response.json()
+
+  return json
 }
 
 // Using activity ID and access_token to get detailed info for a specific workout from the API
