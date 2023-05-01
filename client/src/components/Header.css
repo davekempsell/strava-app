@@ -6,10 +6,10 @@
   text-align: center;
   background-color: white;
   color: var(--orange);
+  overflow-x: hidden;
 }
 
 .header-container > img {
-  width: 50vw;
   min-width: 320px;
   padding: 2rem;
 }

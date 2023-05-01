@@ -1,14 +1,11 @@
-
-export function getWorkouts(setData, setLoading) {
+export function getSingleWorkout(workoutId) {
   // fetch('https://strava-api-server.onrender.com')
-  fetch('http://localhost:5050/')
+  return fetch(`http://localhost:5050/${workoutId}`)
     .then((res) => res.json())
     .then((data) => {
-      setData(data)
-      setLoading(false)
+      return data
     })
     .catch((error) => {
       console.log(error)
-      setData('error loading data')
     })
 }

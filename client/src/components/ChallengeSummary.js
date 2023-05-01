@@ -24,11 +24,12 @@ export default function ChallengeSummary(data) {
     if(!data){
       return 'Loading...'
     }
+    
     const days = daysInMonth()
     const today = new Date()
     const day = today.getDate()
-    const latestWorkout = new Date(data[0].start_date_local)
-    if(day === latestWorkout.getDate()) {
+    const latestWorkout = data.length > 0 ?? new Date(data[0].start_date_local)
+    if(latestWorkout && day === latestWorkout.getDate()) {
       return days - (day + 1)
     } else {
       return days - day
