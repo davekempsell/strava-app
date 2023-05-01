@@ -41,6 +41,5 @@ const getSingleWorkoutData = async (id) => {
 
 exports.getWorkoutData = async (id, res) => {
   const apiResponse = await getSingleWorkoutData(id)
-  console.log(apiResponse)
   res.send(apiResponse)
 }

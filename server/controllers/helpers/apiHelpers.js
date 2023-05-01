@@ -38,7 +38,7 @@ getActivitiesUrl = async (access_token) => {
   const start = getDates.getStart()
   const end = getDates.getEnd()
 
-  return `${activities_link}?before=${end}&after=${start}&access_token=${access_token}`
+  return `${activities_link}?before=${end}&after=${start}&page=1&per_page=100&access_token=${access_token}`
 }
 
 // Using the activities url to retrieve the IDs for this month's activities
