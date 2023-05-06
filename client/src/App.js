@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import Header from './components/Header'
-import DisplayWorkouts from './components/DisplayWorkouts'
+import {Header} from './components/Header'
+import {DisplayWorkouts} from './components/DisplayWorkouts'
 import { getWorkouts } from './components/api-calls/getWorkouts'
 import './App.css'
 import { DisplaySingleWorkoutModal } from './components/DisplaySingleWorkout'
 
 const App = () =>{
   const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
   const [showSingleWorkout, setShowSingleWorkout] = useState(false)
   const [workoutId, setWorkoutId] = useState('')
 
   useEffect(() => {
-    getWorkouts(setData, setLoading)
-  },[])
+    getWorkouts().then(data => setData(data))
+  }, [])
 
   const handleClose = () => {
     setShowSingleWorkout(false)
@@ -23,9 +22,20 @@ const App = () =>{
   return (
     <>
       <div className="main-container">
-        {Header()}
-        {data && DisplayWorkouts(loading, data, setShowSingleWorkout, setWorkoutId)}
-        {showSingleWorkout && <DisplaySingleWorkoutModal workoutId={workoutId} handleClose={handleClose}/>}
+        <Header />
+        {data && 
+          <DisplayWorkouts 
+            data={data} 
+            setShowSingleWorkout={setShowSingleWorkout} 
+            setWorkoutId={setWorkoutId} 
+          />
+        }
+        {showSingleWorkout && 
+          <DisplaySingleWorkoutModal 
+            workoutId={workoutId}  
+            handleClose={handleClose}
+          />
+        }
       </div>
     </>
 

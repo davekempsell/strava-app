@@ -3,13 +3,15 @@ import React from 'react'
 import './DisplayWorkouts.css'
 import { WorkoutCard } from './WorkoutCard'
 
-export default function DisplayWorkouts(loading, data, setShowSingleWorkout, setWorkoutId) {
+export const DisplayWorkouts = ({data, setShowSingleWorkout, setWorkoutId}) => {
 
-  if(loading) return (
-    <div className="display-workouts-container">
-      <p>Loading...</p>
-    </div>
-  )
+  // if(loading) return (
+  //   <div className="display-workouts-container">
+  //     <p>Loading...</p>
+  //   </div>
+  // )
+
+  if(!data) return null
 
   if(data) return (
     <div className="display-workouts-container">
