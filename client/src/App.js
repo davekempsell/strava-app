@@ -23,13 +23,11 @@ const App = () =>{
     <>
       <div className="main-container">
         <Header />
-        {data && 
-          <DisplayWorkouts 
-            data={data} 
-            setShowSingleWorkout={setShowSingleWorkout} 
-            setWorkoutId={setWorkoutId} 
-          />
-        }
+        <DisplayWorkouts 
+          data={data} 
+          setShowSingleWorkout={setShowSingleWorkout} 
+          setWorkoutId={setWorkoutId} 
+        />
         {showSingleWorkout && 
           <DisplaySingleWorkoutModal 
             workoutId={workoutId}

@@ -7,7 +7,6 @@ import { FaHeartbeat } from 'react-icons/fa'
 import { IoCloseCircle } from 'react-icons/io5'
 
 import './DisplaySingleWorkout.css'
-import { getSingleWorkout } from './api-calls/getSingleWorkout'
 
 const workoutCard = (workout, handleClose) => {
   const newDate = new Date(workout.start_date_local)
