@@ -12,8 +12,8 @@ const WorkoutsController = {
     const now = Date.now();
     let newWorkouts = 0
 
-    // If the cache is less than 30 seconds old, return the cached response data
-    if (cache.timestamp && now - cache.timestamp < 30 * 1000) {
+    // If the cache is less than one hour old, return the cached response data
+    if (cache.timestamp && now - cache.timestamp < 3600 * 1000) {
       console.log('returning cached response data');
       res.send(cache.data);
       return;
