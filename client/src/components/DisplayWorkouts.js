@@ -5,12 +5,6 @@ import { WorkoutCard } from './WorkoutCard'
 
 export const DisplayWorkouts = ({data, setShowSingleWorkout, setWorkoutId}) => {
 
-  // if(loading) return (
-  //   <div className="display-workouts-container">
-  //     <p>Loading...</p>
-  //   </div>
-  // )
-
   if(!data) return null
 
   if(data) return (

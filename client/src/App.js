@@ -32,7 +32,8 @@ const App = () =>{
         }
         {showSingleWorkout && 
           <DisplaySingleWorkoutModal 
-            workoutId={workoutId}  
+            workoutId={workoutId}
+            data={data}   
             handleClose={handleClose}
           />
         }

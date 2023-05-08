@@ -1,22 +1,22 @@
 export const WorkoutCard = (workout, setShowSingleWorkout, setWorkoutId) => {
-    const newDate = new Date(workout.start_date_local)
+    const newDate = new Date(workout.timestamp)
     const yyyy = newDate.getFullYear()
     const mm = newDate.getMonth() + 1
     const dd = newDate.getDate()
 
-    const workoutName = workout.name.length > 30 
-      ? workout.name.slice(0,30) + '...' 
-      : workout.name
+    const workoutName = workout.data.name.length > 30 
+      ? workout.data.name.slice(0,30) + '...' 
+      : workout.data.name
 
-    const activityType = workout.type
+    const activityType = workout.data.type
 
     const handleClick = () => {
-      setWorkoutId(workout.id)
+      setWorkoutId(workout.workoutId)
       setShowSingleWorkout(true)
     }
 
     return (
-      <div className="workout-card" key={workout.id} onClick={() => handleClick()}>
+      <div className="workout-card" key={workout.workoutId} onClick={() => handleClick()}>
         <h3>{workoutName}</h3>
         <div className="date-and-type">
           <p>{`${dd}/${mm}/${yyyy}`}</p>
