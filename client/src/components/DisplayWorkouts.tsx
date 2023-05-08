@@ -29,27 +29,37 @@ export const DisplayWorkouts:FC<Props> = ({data, setShowSingleWorkout, setWorkou
   )
 
   return (
-    <WorkoutsContainer 
-      flex 
-      width='100%'
-      justifyContent='center'
-      alignContent='flex-start'
-      wrap='wrap'
-      gap='32px'
-      py='32px'
-      px='16px'
-    >
-      {data.map((workout, index) => {
-        return <WorkoutCard
-          key={'workoutCard' + index}
-          workout={workout} 
-          setShowSingleWorkout={setShowSingleWorkout} 
-          setWorkoutId={setWorkoutId} 
-        />
-      })}
-    </WorkoutsContainer>
+    <StyledBox flex direction='column'>
+      <h1>Workouts</h1>
+      <WorkoutsContainer 
+        flex 
+        width='100%'
+        justifyContent='center'
+        alignContent='flex-start'
+        wrap='wrap'
+        gap='32px'
+        py='32px'
+        px='16px'
+      >
+        {data.map((workout, index) => {
+          return <WorkoutCard
+            key={'workoutCard' + index}
+            workout={workout} 
+            setShowSingleWorkout={setShowSingleWorkout} 
+            setWorkoutId={setWorkoutId} 
+          />
+        })}
+      </WorkoutsContainer>
+    </StyledBox>
+
   )
 }
+
+const StyledBox = styled(Box)`
+  background-color: ${themes.colors.orange};
+  color: white;
+  text-align: center;
+`
 
 const WorkoutsContainer = styled(Box)`
   background-color: ${themes.colors.orange};
