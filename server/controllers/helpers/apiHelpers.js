@@ -36,39 +36,16 @@ exports.getAccessToken = async () => {
 getActivitiesUrl = async (startDate) => {
   const access_token = await this.getAccessToken()
   const activities_link = 'https://www.strava.com/api/v3/athlete/activities'
-  const start = getDates.convertToUnix(startDate)
+  const start = startDate
   const end = getDates.getNow()
 
-  return `${activities_link}?before=${end}&after=${start}&page=1&per_page=100&access_token=${access_token}`
-}
-
-// Using the activities url to retrieve the IDs for this month's activities
-exports.getActivityIds = async (access_token) => {
-  const activitiesUrl = await getActivitiesUrl(access_token)
-  const response = await fetch(activitiesUrl)
-  console.log(response)
-  const json = await response.json()
-  const ids = json.map(element => {
-    return element.id
-    })
-
-  return ids
-}
-
-// Using the activities url to retrieve the list of workouts since 1 Jan 2020
-exports.getAllActivities = async () => {
-  const access_token = await this.getAccessToken()
-  const activitiesUrl = await getActivitiesUrl(access_token)
-  const response = await fetch(activitiesUrl)
-  const json = await response.json()
-
-  return json
+  return `${activities_link}?before=${end}&after=${start}&page=1&per_page=200&access_token=${access_token}`
 }
 
 // Using the activities url to retrieve the list of workouts since a given date
 exports.getLatestActivities = async (lastWorkout) => {
-  // if no timestamp passed to function, start date is set as 1/1/2020
-  const startDate = lastWorkout ?? getDates.getStart()
+  // if no timestamp passed to function, start date is set to two years ago
+  const startDate = getDates.convertToUnix(lastWorkout) ?? getDates.getStart()
   
   const activitiesUrl = await getActivitiesUrl(startDate)
   const response = await fetch(activitiesUrl)
