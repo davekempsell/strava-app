@@ -33,10 +33,11 @@ exports.getAccessToken = async () => {
 
 // Using the getStart and getEnd functions, and access_token to create the url to access
 // the current month's activities.
-getActivitiesUrl = async (access_token) => {
+getActivitiesUrl = async (startDate) => {
+  const access_token = await this.getAccessToken()
   const activities_link = 'https://www.strava.com/api/v3/athlete/activities'
-  const start = getDates.getStart()
-  const end = getDates.getEnd()
+  const start = getDates.convertToUnix(startDate)
+  const end = getDates.getNow()
 
   return `${activities_link}?before=${end}&after=${start}&page=1&per_page=100&access_token=${access_token}`
 }
@@ -55,7 +56,8 @@ exports.getActivityIds = async (access_token) => {
 }
 
 // Using the activities url to retrieve the list of workouts since 1 Jan 2020
-exports.getAllActivities = async (access_token) => {
+exports.getAllActivities = async () => {
+  const access_token = await this.getAccessToken()
   const activitiesUrl = await getActivitiesUrl(access_token)
   const response = await fetch(activitiesUrl)
   const json = await response.json()
@@ -63,11 +65,23 @@ exports.getAllActivities = async (access_token) => {
   return json
 }
 
-// Using activity ID and access_token to get detailed info for a specific workout from the API
-exports.getWorkoutDetails = async (id, access_token) => {
-  const activity_link = 'https://www.strava.com/api/v3/activities';
-  const response = await fetch(`${activity_link}/${id}?access_token=${access_token}`)
-  const json = response.json()
+// Using the activities url to retrieve the list of workouts since a given date
+exports.getLatestActivities = async (lastWorkout) => {
+  // if no timestamp passed to function, start date is set as 1/1/2020
+  const startDate = lastWorkout ?? getDates.getStart()
+  
+  const activitiesUrl = await getActivitiesUrl(startDate)
+  const response = await fetch(activitiesUrl)
+  const json = await response.json()
 
   return json
 }
+
+// Using activity ID and access_token to get detailed info for a specific workout from the API
+// exports.getWorkoutDetails = async (id, access_token) => {
+//   const activity_link = 'https://www.strava.com/api/v3/activities';
+//   const response = await fetch(`${activity_link}/${id}?access_token=${access_token}`)
+//   const json = response.json()
+
+//   return json
+// }

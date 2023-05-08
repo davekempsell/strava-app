@@ -15,3 +15,15 @@ exports.getEnd = () => {
   const end = Date.parse(endDate) / 1000
   return end.toString()
 }
+
+exports.getNow = () => {
+  const now = new Date()
+  const end = now.getTime() / 1000
+  return end.toString()
+}
+
+exports.convertToUnix = (dateTimeStr) => {
+  const dateTime = new Date(dateTimeStr)
+  const dayBefore = (dateTime.getTime() / 1000) - 86400
+  return dayBefore.toString()
+}
