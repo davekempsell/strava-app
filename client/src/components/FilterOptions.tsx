@@ -62,10 +62,16 @@ interface FilterBoxProps {
 }
 
 const FilterBox = styled(Box)<FilterBoxProps>`
+  display: flex;
+  justify-content: center;
   padding: 8px;
-  color: ${(props) => props.isActive ? themes.colors.orange : 'black'};
-  border-bottom: 2px solid ${(props) => props.isActive ? themes.colors.orange : 'transparent'};
+  color: ${(props) => props.isActive ? themes.colors.lightText : themes.colors.text};
+  font-weight: ${(props) => props.isActive ? '700' : '400'};
+  background-color: ${(props) => props.isActive ? themes.colors.primary : themes.colors.background};
+  border: 1px solid ${themes.colors.secondary};
   transition: all 400ms ease-in-out;
+  width: 90px;
+  font-size: 14px;
 
   &:not(:last-child) {
     border-right: 1px solid #D3D3D3;
@@ -73,6 +79,6 @@ const FilterBox = styled(Box)<FilterBoxProps>`
   
   :hover {
     cursor: pointer;
-    border-bottom: 2px solid ${themes.colors.orange};
+    background-color: ${(props) => props.isActive ? themes.colors.primary : themes.colors.tertiary};
   }
 `

@@ -10,10 +10,10 @@ export interface MeasureProps {
 }
 
 export const measure: MeasureFN = (props: MeasureProps) => {
-  const { width, height, maxWidth, minWidth, minHeight, maxHeight } = props
+  const { width = '100%', height, maxWidth, minWidth, minHeight, maxHeight } = props
 
   return `
-    ${width ? `width: ${width};` : ''}
+    width: ${width};
     ${maxWidth ? `max-width: ${maxWidth};` : ''}
     ${minWidth ? `min-width: ${minWidth};` : ''}
     ${height ? `height: ${height};` : ''}

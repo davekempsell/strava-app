@@ -8,6 +8,8 @@ import { DisplaySingleWorkoutModal } from './components/DisplaySingleWorkout'
 import { FilterOptions } from './components/FilterOptions'
 import { FilterOptionsType, WorkoutData } from './types/types'
 import { Box } from './utils/components/FlexBox'
+import styled from 'styled-components'
+import { themes } from './utils'
 
 const App:FC = () =>{
   const [data, setData] = useState<WorkoutData[] | null>(null)
@@ -27,7 +29,7 @@ const App:FC = () =>{
   const filteredData = data ? filterData(data, filterOption) : []
 
   return (
-    <Box flex direction='column' width='100%'>
+    <MainContainer flex direction='column'>
       <Header />
       <FilterOptions setFilterOption={setFilterOption} filterOption={filterOption}/>
       {data &&
@@ -44,9 +46,13 @@ const App:FC = () =>{
           handleClose={handleClose}
         />
       }
-    </Box>
+    </MainContainer>
 
   )
 }
+
+const MainContainer = styled(Box)`
+  background-color: ${themes.colors.background};
+`
 
 export default App

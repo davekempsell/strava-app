@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { WorkoutCard } from './WorkoutCard'
+import { WorkoutCard } from './WorkoutCard/WorkoutCard'
 import { WorkoutData } from '../types/types'
 import { Box } from '../utils/components/FlexBox'
 import styled from 'styled-components'
@@ -16,8 +16,7 @@ export const DisplayWorkouts:FC<Props> = ({data, setShowSingleWorkout, setWorkou
 
   if(!data) return (
     <WorkoutsContainer 
-      flex 
-      width='100%'
+      flex
       alignItems='center'
       justifyContent='center'
       wrap='wrap'
@@ -29,11 +28,10 @@ export const DisplayWorkouts:FC<Props> = ({data, setShowSingleWorkout, setWorkou
   )
 
   return (
-    <StyledBox flex direction='column'>
-      <h1>Workouts</h1>
+    <DisplayWorkoutsWrapper flex direction='column' alignItems='center'>
+      <h2>Workouts</h2>
       <WorkoutsContainer 
-        flex 
-        width='100%'
+        flex
         justifyContent='center'
         alignContent='flex-start'
         wrap='wrap'
@@ -50,20 +48,18 @@ export const DisplayWorkouts:FC<Props> = ({data, setShowSingleWorkout, setWorkou
           />
         })}
       </WorkoutsContainer>
-    </StyledBox>
+    </DisplayWorkoutsWrapper>
 
   )
 }
 
-const StyledBox = styled(Box)`
-  background-color: ${themes.colors.orange};
-  color: white;
-  text-align: center;
+const DisplayWorkoutsWrapper = styled(Box)`
+  background-color: ${themes.colors.tertiary};
+  color: ${themes.colors.text};
+  border-top: 1px solid ${themes.colors.secondary}
 `
 
 const WorkoutsContainer = styled(Box)`
-  background-color: ${themes.colors.orange};
-  color: white;
-  text-align: center;
+  background-color: ${themes.colors.tertiary};
   min-height: 100vh;  
 `

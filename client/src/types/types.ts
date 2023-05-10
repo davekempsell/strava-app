@@ -4,6 +4,9 @@ export interface WorkoutData {
   data: {
     name: string
     type: string
+    moving_time: number
+    suffer_score: number
+    average_heartrate: number
   }
   timestamp: string
 }
