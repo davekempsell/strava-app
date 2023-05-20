@@ -40,7 +40,7 @@ export const ActivityIcon:FC<Props> = ({activityType, size = 16}) => {
   }
 
   return (
-    <Box flex direction="column" justifyContent="center" width='auto'>
+    <Box flex direction="column" justifyContent="flex-start" width='auto' mt='4px'>
       <Icon />
     </Box>
   )

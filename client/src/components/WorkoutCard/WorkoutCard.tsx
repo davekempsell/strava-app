@@ -52,14 +52,14 @@ export const WorkoutCard:FC<Props> = ({workout, setShowSingleWorkout, setWorkout
         flex
         direction="column"
         wrap='wrap'
-        justifyContent="center"
+        justifyContent="flex-start"
         width='320px'
         p='16px'
       >
         <DateWrapper flex>
           <p>{`${dd}/${mm}/${yyyy}`} at {time}</p>
         </DateWrapper>
-        <Box flex mt='16px' gap='16px'>
+        <Box flex mt='16px' gap='16px' height='44px'>
           <ActivityIcon activityType={activityType}/>
           <h3>{workoutName}</h3>
         </Box>

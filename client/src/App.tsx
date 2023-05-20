@@ -4,16 +4,18 @@ import {DisplayWorkouts} from './components/DisplayWorkouts'
 import { getWorkouts } from './components/api-calls/getWorkouts'
 import './App.css'
 import { filterData } from './components/filterData/filterData'
-import { DisplaySingleWorkoutModal } from './components/DisplaySingleWorkout'
+import { SingleWorkoutModal } from './components/SingleWorkoutModal'
 import { FilterOptions } from './components/FilterOptions'
 import { FilterOptionsType, WorkoutData } from './types/types'
 import { Box } from './utils/components/FlexBox'
 import styled from 'styled-components'
 import { themes } from './utils'
+import { DataDisplay } from './components/DataDisplay/DataDisplay'
 
 const App:FC = () =>{
   const [data, setData] = useState<WorkoutData[] | null>(null)
   const [showSingleWorkout, setShowSingleWorkout] = useState(false)
+  const [singleWorkoutData, setSingleWorkoutData] = useState<WorkoutData['data'] | null>(null)
   const [workoutId, setWorkoutId] = useState('')
   const [filterOption, setFilterOption] = useState<FilterOptionsType>('oneYear')
 
@@ -23,8 +25,15 @@ const App:FC = () =>{
 
   const handleClose = () => {
     setShowSingleWorkout(false)
+    setSingleWorkoutData(null)
     setWorkoutId('')
   }
+
+  useEffect(() => {
+    const workoutData = data?.find(workout => workout.workoutId === workoutId)?.data
+    if(workoutData) setSingleWorkoutData(workoutData)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [workoutId])
 
   const filteredData = data ? filterData(data, filterOption) : []
 
@@ -33,16 +42,18 @@ const App:FC = () =>{
       <Header />
       <FilterOptions setFilterOption={setFilterOption} filterOption={filterOption}/>
       {data &&
+        <DataDisplay data={filteredData} filterOption={filterOption}/>
+      }
+      {data &&
         <DisplayWorkouts 
           data={filteredData} 
           setShowSingleWorkout={setShowSingleWorkout} 
           setWorkoutId={setWorkoutId} 
         />
       }
-      {showSingleWorkout && 
-        <DisplaySingleWorkoutModal 
-          workoutId={workoutId}
-          data={data}   
+      {showSingleWorkout && singleWorkoutData && 
+        <SingleWorkoutModal 
+          workout={singleWorkoutData}   
           handleClose={handleClose}
         />
       }

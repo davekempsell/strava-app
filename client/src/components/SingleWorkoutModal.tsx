@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { FC } from 'react'
 import { BsDropletFill, BsSpeedometer2 } from 'react-icons/bs'
 import { GiPathDistance } from 'react-icons/gi'
 import { BiTimer } from 'react-icons/bi'
@@ -7,8 +7,16 @@ import { FaHeartbeat } from 'react-icons/fa'
 import { IoCloseCircle } from 'react-icons/io5'
 
 import './DisplaySingleWorkout.css'
+import { WorkoutData } from '../types'
+import styled from 'styled-components'
+import { Box } from '../utils'
 
-const workoutCard = (workout, handleClose) => {
+interface Props {
+  workout: WorkoutData['data'],
+  handleClose: () => void
+}
+
+export const SingleWorkoutModal:FC<Props> = ({workout, handleClose}) => {
   const newDate = new Date(workout.start_date_local)
   const yyyy = newDate.getFullYear()
   const mm = newDate.getMonth() + 1
@@ -26,12 +34,15 @@ const workoutCard = (workout, handleClose) => {
   const aveHr = workout.average_heartrate
   const suffer_score = workout.suffer_score
 
-  const handleCardClick = (event) => {
+  const handleCardClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
   };
 
+  if(!workout) return <></>
+
   return (
-    <div className="single-workout-card" key={workout.id} onClick={handleCardClick}>
+    <ModalOverlay onClick={() => handleClose()}>
+          <div className="single-workout-card" key={workout.id} onClick={handleCardClick}>
       <button onClick={() => handleClose()}><IoCloseCircle /></button>
       <h2>{workout.name}</h2>
       <div className="modal-date-and-type">
@@ -71,20 +82,20 @@ const workoutCard = (workout, handleClose) => {
         </div>
       </div>
     </div>
+    </ModalOverlay>
   )
 }
 
-export const DisplaySingleWorkoutModal = ({workoutId, data, handleClose}) => {
-  const [workoutData, setWorkoutData] = useState(null)
-
-  useEffect(() => {
-    const workout = data.filter((workout) => workout.workoutId === workoutId)
-    setWorkoutData(workout[0].data)
-  }, [workoutId, data])
-
-  return (
-    <div className="single-workout-container" onClick={() => handleClose()}>
-      {workoutData && workoutCard(workoutData, handleClose)}
-    </div>
-  )
-}
+const ModalOverlay = styled(Box)`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
