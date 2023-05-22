@@ -1,7 +1,6 @@
 import { FilterOptionsType, WorkoutData } from "../../types"
 
-
-const convertToUnix = (dateTimeStr: string) => {
+export const convertToUnix = (dateTimeStr: string) => {
   const dateTime = new Date(dateTimeStr)
   const unixTimestamp = dateTime.getTime() / 1000
 
@@ -11,7 +10,6 @@ const convertToUnix = (dateTimeStr: string) => {
 export const filterData = (data: WorkoutData[], filterOption: FilterOptionsType) => {
   const now = new Date()
   const nowUnix = now.getTime() / 1000
-  // set the date to filter by
 
   const getFilterOptionUnix = () => {
     switch(filterOption) {

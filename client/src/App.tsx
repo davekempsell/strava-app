@@ -11,6 +11,8 @@ import { Box } from './utils/components/FlexBox'
 import styled from 'styled-components'
 import { themes } from './utils'
 import { DataDisplay } from './components/DataDisplay/DataDisplay'
+import { SufferScoreChart } from './components/SufferScoreChart/SufferScoreChart'
+import { getMaxSufferScore } from './components/SufferScoreChart/sufferScoreHelpers'
 
 const App:FC = () =>{
   const [data, setData] = useState<WorkoutData[] | null>(null)
@@ -43,6 +45,9 @@ const App:FC = () =>{
       <FilterOptions setFilterOption={setFilterOption} filterOption={filterOption}/>
       {data &&
         <DataDisplay data={filteredData} filterOption={filterOption}/>
+      }
+      {data && 
+        <SufferScoreChart data={filteredData} maxScore={getMaxSufferScore(data)}/>
       }
       {data &&
         <DisplayWorkouts 

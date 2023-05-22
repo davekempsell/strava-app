@@ -23,7 +23,14 @@ export const DataDisplay:FC<Props> = ({data, filterOption}) => {
   }, [data, filterOption])
 
   return (
-    <DataContainer flex py='24px' px='48px' justifyContent="space-between">
+    <DataContainer 
+      flex
+      wrap='wrap'
+      gap='24px'
+      py='24px' 
+      px='48px' 
+      justifyContent="center"
+    >
       <StatWrapper>
         <h2>Number of Workouts</h2>
         <h1>{numberOfWorkouts}</h1>
