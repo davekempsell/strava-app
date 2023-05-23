@@ -8,6 +8,7 @@ interface DataItem {
   date: string
   tooltipLabel: string
   aveSuffering: number
+  sufferScore: number
 }
 
 interface TooltipPayload extends Payload<number, string> {
@@ -24,6 +25,10 @@ export const CustomTooltip: FC<CustomTooltipProps> = ({ active, payload }) => {
     return (
       <TooltipContainer>
         <p>{payload[0].payload.tooltipLabel}</p>
+          <SufferScoreWrapper flex direction='column' mt='8px'>
+            <h4>Workout SufferScore:</h4>
+            <h3>{payload[0].payload.sufferScore}</h3>
+          </SufferScoreWrapper>
           <SufferScoreWrapper flex direction='column' mt='8px'>
           <h4>Ave. SufferScore:</h4>
           <h3>{payload[0].payload.aveSuffering}</h3>

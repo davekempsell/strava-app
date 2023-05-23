@@ -21,7 +21,8 @@ export const getSufferScoreAverages = (workouts: WorkoutData[]) => {
         workout: (index + 1).toString(),
         date: `${dd}/${mm}/${yy}`,
         tooltipLabel: `${dd}/${mm}/${yy} ${time}`,
-        aveSuffering: Number(latestAverage.toFixed(1))
+        aveSuffering: Number(latestAverage.toFixed(1)),
+        sufferScore: workout.data.suffer_score
       }
     })
   }

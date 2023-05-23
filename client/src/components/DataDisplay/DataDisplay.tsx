@@ -63,6 +63,7 @@ const StatWrapper = styled(Box)`
   align-items: center;
   padding: 16px;
   width: 252px;
+  min-width: 252px;
   background-color: ${themes.colors.tertiary};
 
   h2,h1 {

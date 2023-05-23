@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react'
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Label } from 'recharts';
 import { Box, themes } from '../../utils';
 import styled from 'styled-components';
 import { WorkoutData } from '../../types';
@@ -43,16 +43,29 @@ export const SufferScoreChart:FC<Props> = ({data, maxScore}) => {
   return (
     <> 
       {showChart &&
-        <ChartContainer flex px='64px' my='32px'>
-          <ResponsiveContainer width="100%" height='100%'>
-            <LineChart data={actualData} margin={{ top: 0, right: 48, bottom: 64, left: 0}}>
-              <Line type="monotone" dataKey="aveSuffering" stroke={themes.colors.primary} dot={false}/>
-              <CartesianGrid stroke={themes.colors.secondary} strokeDasharray="5 5" />
-              <XAxis dataKey="workout" interval={intervalSize()} />
-              <YAxis domain={[0, maxScore]} ticks={yTicks}/>
-              <Tooltip content={<CustomTooltip />}/>
-            </LineChart>
-          </ResponsiveContainer>
+        <ChartContainer flex px='64px' py='32px'>
+          <ChartWrapper flex direction='column' alignItems='center'>
+            <h3>Average SufferScore</h3>
+            <ResponsiveContainer width="100%" height='90%'>
+              <LineChart data={actualData} margin={{ top: 16, right: 48, bottom: 32, left: 16}}>
+                <Line type="monotone" dataKey="aveSuffering" stroke={themes.colors.primary} dot={false}/>
+                <CartesianGrid stroke={themes.colors.secondary} strokeDasharray="5 5" />
+                <XAxis dataKey="workout" interval={intervalSize()}>
+                  <Label value="Workout" position="insideBottom" offset={-8} />
+                </XAxis>
+                <YAxis domain={[0, maxScore]} ticks={yTicks}>
+                  <Label 
+                    value="SufferScore" 
+                    position='insideLeft' 
+                    offset={16} 
+                    angle={-90} 
+                    style={{ textAnchor: 'middle' }}
+                  />
+                </YAxis>
+                <Tooltip content={<CustomTooltip />}/>
+              </LineChart>
+            </ResponsiveContainer>
+          </ChartWrapper>
         </ChartContainer>
       }
     </>
@@ -62,8 +75,14 @@ export const SufferScoreChart:FC<Props> = ({data, maxScore}) => {
 
 const ChartContainer = styled(Box)`
   height: 25dvw;
+  border-top: 1px solid ${themes.colors.secondary};
+  background-color: ${themes.colors.tertiary};
+`
 
-  // @media (max-width: 650px) {
-  //   display: none;
-  // }
+const ChartWrapper = styled(Box)`
+  background-color: ${themes.colors.background};
+
+  h3 {
+    margin: 16px 0 0 0;
+  }
 `

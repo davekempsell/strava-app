@@ -55,6 +55,11 @@ const FilterContainer = styled(Box)`
   justify-content: flex-end;
   padding-right: 32px;
   margin-bottom: 8px;
+
+  @media (max-width: 800px) {
+    justify-content: center;
+    padding: 0;
+  }
 `
 
 interface FilterBoxProps {
@@ -80,5 +85,10 @@ const FilterBox = styled(Box)<FilterBoxProps>`
   :hover {
     cursor: pointer;
     background-color: ${(props) => props.isActive ? themes.colors.primary : themes.colors.tertiary};
+  }
+
+  @media (max-width: 420px) {
+    width: 75px;
+    font-size: 12px;
   }
 `
