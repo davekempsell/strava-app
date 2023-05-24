@@ -56,7 +56,7 @@ export const DisplayWorkouts:FC<Props> = ({data, setShowSingleWorkout, setWorkou
 const DisplayWorkoutsWrapper = styled(Box)`
   background-color: ${themes.colors.tertiary};
   color: ${themes.colors.text};
-  border-top: 1px solid ${themes.colors.secondary}
+  border-top: 1px solid ${themes.colors.secondary};
 `
 
 const WorkoutsContainer = styled(Box)`

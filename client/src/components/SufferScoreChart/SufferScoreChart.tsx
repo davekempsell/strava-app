@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const SufferScoreChart:FC<Props> = ({data, maxScore}) => {
-  const actualData = getSufferScoreAverages(data)
+  const chartData = getSufferScoreAverages(data)
 
   const [showChart, setshowChart] = useState(window.innerWidth > 800);
 
@@ -30,10 +30,10 @@ export const SufferScoreChart:FC<Props> = ({data, maxScore}) => {
 
 
   const intervalSize = () => {
-      if (actualData.length < 40) {
+      if (chartData.length < 40) {
       return 0;
     } else {
-      return Math.floor((actualData.length - 40) / 40) + 1;
+      return Math.floor((chartData.length - 40) / 40) + 1;
     }
   }
 
@@ -47,7 +47,7 @@ export const SufferScoreChart:FC<Props> = ({data, maxScore}) => {
           <ChartWrapper flex direction='column' alignItems='center'>
             <h3>Average SufferScore</h3>
             <ResponsiveContainer width="100%" height='90%'>
-              <LineChart data={actualData} margin={{ top: 16, right: 48, bottom: 32, left: 16}}>
+              <LineChart data={chartData} margin={{ top: 16, right: 48, bottom: 32, left: 16}}>
                 <Line type="monotone" dataKey="aveSuffering" stroke={themes.colors.primary} dot={false}/>
                 <CartesianGrid stroke={themes.colors.secondary} strokeDasharray="5 5" />
                 <XAxis dataKey="workout" interval={intervalSize()}>
@@ -74,7 +74,7 @@ export const SufferScoreChart:FC<Props> = ({data, maxScore}) => {
 }
 
 const ChartContainer = styled(Box)`
-  height: 25dvw;
+  height: 40dvw;
   border-top: 1px solid ${themes.colors.secondary};
   background-color: ${themes.colors.tertiary};
 `

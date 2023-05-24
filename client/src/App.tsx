@@ -13,6 +13,7 @@ import { themes } from './utils'
 import { DataDisplay } from './components/DataDisplay/DataDisplay'
 import { SufferScoreChart } from './components/SufferScoreChart/SufferScoreChart'
 import { getMaxSufferScore } from './components/SufferScoreChart/sufferScoreHelpers'
+import { WorkoutsPieCharts } from './components/WorkoutsPieCharts/WorkoutsPieCharts'
 
 const App:FC = () =>{
   const [data, setData] = useState<WorkoutData[] | null>(null)
@@ -48,6 +49,9 @@ const App:FC = () =>{
       }
       {data && 
         <SufferScoreChart data={filteredData} maxScore={getMaxSufferScore(data)}/>
+      }
+      {data && 
+        <WorkoutsPieCharts data={filteredData}/>
       }
       {data &&
         <DisplayWorkouts 
