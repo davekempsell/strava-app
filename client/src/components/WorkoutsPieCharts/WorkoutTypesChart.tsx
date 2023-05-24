@@ -3,42 +3,14 @@ import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recha
 import styled from 'styled-components';
 import { Box, themes } from '../../utils';
 import { WorkoutData } from '../../types';
-import { hexToRGBA } from '../../utils/helpers/general';
+import { getColors, getWorkoutTypes } from './pieChartHelpers';
 
 interface Props {
   data: WorkoutData[]
 }
 
 export const WorkoutTypesChart:FC<Props> = ({data}) => {
-  const getWorkoutTypes = (data: WorkoutData[]) => {
-    const types = data.map(workout => workout.data.type)
-
-    let workoutTypes: { [key: string]: number} = {}
-
-    types.forEach(type => {
-      if(workoutTypes[type]) {
-        workoutTypes[type]++
-      } else {
-        workoutTypes[type] = 1
-      }
-    })
-
-    const chartData = Object.entries(workoutTypes).map(([type, value]) => ({type, value}))
-
-    return chartData
-  }
-
-  const getColors = () => {
-    const workouts = getWorkoutTypes(data)
-    const colors = workouts.map((workout, index) => {
-      const opacity = (1 / workouts.length) * (index + 1);
-      return hexToRGBA(themes.colors.primary, opacity)
-    })
-
-    return colors.reverse()
-  }
-
-  const COLORS = getColors();
+  const colors = getColors(data, themes.colors.primary);
 
   return (
     <ChartWrapper flex direction='column' alignItems='center' p='16px' gap='16px'>
@@ -54,7 +26,7 @@ export const WorkoutTypesChart:FC<Props> = ({data}) => {
             outerRadius='90%'
           >
             {getWorkoutTypes(data).map((entry, index) => (
-              <Cell key={entry.type} fill={COLORS[index % COLORS.length]} />
+              <Cell key={entry.type} fill={colors[index % colors.length]} />
             ))}
           </Pie>
           <Tooltip />
