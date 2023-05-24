@@ -14,8 +14,10 @@ import { DataDisplay } from './components/DataDisplay/DataDisplay'
 import { SufferScoreChart } from './components/SufferScoreChart/SufferScoreChart'
 import { getMaxSufferScore } from './components/SufferScoreChart/sufferScoreHelpers'
 import { WorkoutsPieCharts } from './components/WorkoutsPieCharts/WorkoutsPieCharts'
+import { LoadingScreen } from './components/LoadingScreen/LoadingScreen'
 
 const App:FC = () =>{
+  const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<WorkoutData[] | null>(null)
   const [showSingleWorkout, setShowSingleWorkout] = useState(false)
   const [singleWorkoutData, setSingleWorkoutData] = useState<WorkoutData['data'] | null>(null)
@@ -23,7 +25,10 @@ const App:FC = () =>{
   const [filterOption, setFilterOption] = useState<FilterOptionsType>('oneYear')
 
   useEffect(() => {
-    getWorkouts().then(data => setData(data))
+    getWorkouts().then(data => {
+      setData(data)
+      setIsLoading(false)
+    })
   }, [])
 
   const handleClose = () => {
@@ -43,29 +48,35 @@ const App:FC = () =>{
   return (
     <MainContainer flex direction='column'>
       <Header />
-      <FilterOptions setFilterOption={setFilterOption} filterOption={filterOption}/>
-      {data &&
-        <DataDisplay data={filteredData} filterOption={filterOption}/>
+      {!isLoading ?
+        <>
+          <FilterOptions setFilterOption={setFilterOption} filterOption={filterOption}/>
+          {data &&
+            <DataDisplay data={filteredData} filterOption={filterOption}/>
+          }
+          {data && 
+            <SufferScoreChart data={filteredData} maxScore={getMaxSufferScore(data)}/>
+          }
+          {data && 
+            <WorkoutsPieCharts data={filteredData}/>
+          }
+          {data &&
+            <DisplayWorkouts 
+              data={filteredData} 
+              setShowSingleWorkout={setShowSingleWorkout} 
+              setWorkoutId={setWorkoutId} 
+            />
+          }
+          {showSingleWorkout && singleWorkoutData && 
+            <SingleWorkoutModal 
+              workout={singleWorkoutData}   
+              handleClose={handleClose}
+            />
+          }
+        </>
+        : <LoadingScreen isLoading={isLoading}/>
       }
-      {data && 
-        <SufferScoreChart data={filteredData} maxScore={getMaxSufferScore(data)}/>
-      }
-      {data && 
-        <WorkoutsPieCharts data={filteredData}/>
-      }
-      {data &&
-        <DisplayWorkouts 
-          data={filteredData} 
-          setShowSingleWorkout={setShowSingleWorkout} 
-          setWorkoutId={setWorkoutId} 
-        />
-      }
-      {showSingleWorkout && singleWorkoutData && 
-        <SingleWorkoutModal 
-          workout={singleWorkoutData}   
-          handleClose={handleClose}
-        />
-      }
+
     </MainContainer>
 
   )
