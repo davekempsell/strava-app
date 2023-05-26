@@ -14,47 +14,52 @@ export const WorkoutDurationChart:FC<Props> = ({data}) => {
   const colors = getColors(data, themes.colors.primary);
 
   return (
-    <ChartWrapper flex direction='column' alignItems='center' p='16px' gap='16px'>
+    <ChartContainer flex width='auto' direction='column' alignItems='center' p='16px' gap='16px'>
       <h3>Workout Durations</h3>
-      <ResponsiveContainer width="100%">
-        <PieChart margin={{top: 0, right: 0, bottom: 0, left: 0}}>
-          <Pie
-            data={getWorkoutDurations(data)}
-            dataKey="value"
-            nameKey="duration"
-            cx="50%"
-            cy="50%"
-            outerRadius='90%'
-          >
-            {getWorkoutDurations(data).map((entry, index) => (
-              <Cell key={entry.duration} fill={colors[index % colors.length]} />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend 
-            wrapperStyle={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
-            align="center"
-            verticalAlign="bottom"
-            formatter={(value, entry) => <span style={{ color: themes.colors.darkText }}>{value}</span>}
-          />
-        </PieChart>
-      </ResponsiveContainer>
-    </ChartWrapper>
+      <ChartWrapper>
+        <ResponsiveContainer width="100%">
+          <PieChart margin={{top: 0, right: 0, bottom: 0, left: 0}}>
+            <Pie
+              data={getWorkoutDurations(data)}
+              dataKey="value"
+              nameKey="duration"
+              cx="50%"
+              cy="50%"
+              outerRadius='90%'
+            >
+              {getWorkoutDurations(data).map((entry, index) => (
+                <Cell key={entry.duration} fill={colors[index % colors.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend 
+              wrapperStyle={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
+              align="center"
+              verticalAlign="bottom"
+              formatter={(value, entry) => <span style={{ color: themes.colors.darkText }}>{value}</span>}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </ChartWrapper>
+
+    </ChartContainer>
   );
 
 }
 
-const ChartWrapper = styled(Box)`
-  height: 450px;
-  width: 450px;
+const ChartContainer = styled(Box)`
   background-color: ${themes.colors.background};
   h3 {
     margin: 0;
   }
+`
+
+const ChartWrapper = styled(Box)`
+  width: 400px;
+  height: 400px;
 
   @media(max-width: 800px) {
-    height: 60%;
-    width: 60%;
-    max-width: 350px;
+    width: 300px;
+    height: 300px;
   }
 `

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FadeLoader } from 'react-spinners';
+import { MoonLoader } from 'react-spinners';
 import { Box, themes } from "../../utils";
 import styled from "styled-components";
 
@@ -13,13 +13,13 @@ export const LoadingScreen:FC<Props> = ({isLoading}) => {
       flex 
       direction="column" 
       alignItems="center" 
+      gap='64px'
     >
-      <FadeLoader 
+      <MoonLoader
         color={themes.colors.primary} 
         loading={isLoading}
-        speedMultiplier={1}
-        height={25}
-        margin={15}
+        speedMultiplier={0.75}
+        
       />
     </LoadingContainer>
   )

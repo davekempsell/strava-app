@@ -12,7 +12,7 @@ interface Props {
 export const WorkoutsPieCharts:FC<Props> = ({data}) => {
 
   return (
-    <ChartContainer 
+    <ChartsContainer 
       flex 
       wrap='wrap' 
       px='64px' 
@@ -22,12 +22,12 @@ export const WorkoutsPieCharts:FC<Props> = ({data}) => {
     >
       <WorkoutTypesChart data={data} />
       <WorkoutDurationChart data={data} />
-    </ChartContainer>
+    </ChartsContainer>
   );
 
 }
 
-const ChartContainer = styled(Box)`
+const ChartsContainer = styled(Box)`
   border-top: 1px solid ${themes.colors.secondary};
   background-color: ${themes.colors.tertiary};
 `

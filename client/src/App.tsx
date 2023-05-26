@@ -55,7 +55,7 @@ const App:FC = () =>{
             <DataDisplay data={filteredData} filterOption={filterOption}/>
           }
           {data && 
-            <SufferScoreChart data={filteredData} maxScore={getMaxSufferScore(data)}/>
+            <SufferScoreChart filteredData={filteredData} maxScore={getMaxSufferScore(data)}/>
           }
           {data && 
             <WorkoutsPieCharts data={filteredData}/>
